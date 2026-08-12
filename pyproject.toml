@@ -1,0 +1,91 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "langchain-1claw"
+version = "0.1.0"
+description = "LangChain integration for 1Claw — HSM-backed secrets, signing, memory, and automations for AI agents"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.10"
+authors = [{ name = "1Claw", email = "ops@1claw.xyz" }]
+keywords = [
+  "1claw",
+  "langchain",
+  "secrets",
+  "vault",
+  "agents",
+  "signing",
+  "memory",
+  "hsm",
+  "blockchain",
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Security",
+  "Topic :: Software Development :: Libraries",
+  "Typing :: Typed",
+]
+dependencies = [
+  "langchain-core>=0.3.0,<1.0.0",
+  "httpx>=0.27",
+  "pydantic>=2.0",
+]
+
+[project.optional-dependencies]
+langgraph = ["langgraph>=0.2.0,<1.0.0"]
+all = ["langgraph>=0.2.0,<1.0.0"]
+dev = [
+  "pytest>=8.0",
+  "pytest-asyncio>=0.23",
+  "respx>=0.21",
+  "ruff>=0.4",
+  "mypy>=1.8",
+  "freezegun>=1.5",
+  "build>=1.0",
+  "twine>=5.0",
+]
+
+[project.urls]
+Documentation = "https://docs.1claw.xyz/docs/integrations/langchain"
+Homepage = "https://github.com/1clawAI/langchain-1claw"
+Repository = "https://github.com/1clawAI/langchain-1claw"
+Changelog = "https://github.com/1clawAI/langchain-1claw/releases"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+langchain_1claw = ["py.typed"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+src = ["src", "tests", "examples"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "W"]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+mypy_path = "src"
+packages = ["langchain_1claw"]
+
+[[tool.mypy.overrides]]
+module = ["langchain_core.*", "langgraph.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
