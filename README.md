@@ -4,7 +4,11 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://python.org)
 
-LangChain integration for [1Claw](https://1claw.xyz) — HSM-backed secrets, multi-chain signing, encrypted memory, and workflow automations for AI agents.
+You're building a LangChain agent that needs API keys, wallet signing, or memory that survives across sessions. Pasting credentials into `.env` files works until you deploy, share the repo, or the model accidentally echoes a secret in chat.
+
+This package gives your agent 11 LangChain tools backed by [1Claw](https://1claw.xyz). Secrets live in an HSM-encrypted vault. A human grants access through policies, so the agent only reads paths you allow. Signing keys never leave the server. Memory is encrypted and searchable.
+
+Install one package, pass an `ocv_` agent API key, and call `get_all_tools()`. You get vault CRUD, encrypted memory, EIP-191 signing, multi-chain transactions, and automation triggers without writing HTTP clients yourself.
 
 ## Features
 
