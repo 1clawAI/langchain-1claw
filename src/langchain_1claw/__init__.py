@@ -12,11 +12,13 @@ from .retrievers import OneclawMemoryRetriever
 from .tools import (
     OneclawGetBalanceTool,
     OneclawGetSecretTool,
+    OneclawListEnvVarsTool,
     OneclawListSecretsTool,
     OneclawMemoryGetTool,
     OneclawMemoryPutTool,
     OneclawMemorySearchTool,
     OneclawPutSecretTool,
+    OneclawResolveEnvTool,
     OneclawRotateSecretTool,
     OneclawSignMessageTool,
     OneclawSubmitTransactionTool,
@@ -24,7 +26,7 @@ from .tools import (
     get_all_tools,
 )
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 __all__ = [
     # Client
@@ -38,6 +40,8 @@ __all__ = [
     "OneclawPutSecretTool",
     "OneclawListSecretsTool",
     "OneclawRotateSecretTool",
+    "OneclawResolveEnvTool",
+    "OneclawListEnvVarsTool",
     "OneclawMemoryPutTool",
     "OneclawMemoryGetTool",
     "OneclawMemorySearchTool",

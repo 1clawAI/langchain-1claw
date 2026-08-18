@@ -361,6 +361,78 @@ class OneclawGetBalanceTool(BaseTool):
 
 
 # ---------------------------------------------------------------------------
+# Environment Variables
+# ---------------------------------------------------------------------------
+
+
+class _ResolveEnvInput(BaseModel):
+    environment: str | None = Field(
+        None, description="Environment name (production, preview, development)"
+    )
+    git_branch: str | None = Field(
+        None, description="Git branch for branch-specific overrides"
+    )
+    vault_id: str | None = Field(None, description="Vault UUID (uses default if omitted)")
+
+
+class OneclawResolveEnvTool(BaseTool):
+    """Resolve environment variables for a vault with precedence rules."""
+
+    name: str = "oneclaw_resolve_env"
+    description: str = (
+        "Resolve environment variables for the vault with Vercel-style precedence: "
+        "org shared vars < vault vars < branch-specific overrides. Returns the final "
+        "merged key-value map and sources. Use this to get the runtime config for a "
+        "specific environment and branch."
+    )
+    args_schema: type[BaseModel] = _ResolveEnvInput
+    client: OneclawClient
+
+    model_config = ConfigDict(arbitrary_types_allowed=True)
+
+    def _run(
+        self,
+        environment: str | None = None,
+        git_branch: str | None = None,
+        vault_id: str | None = None,
+    ) -> str:
+        try:
+            result = self.client.resolve_env_vars(
+                vault_id=vault_id, environment=environment, git_branch=git_branch
+            )
+            return json.dumps(result)
+        except OneclawError as e:
+            return f"[1claw error] {e}"
+
+
+class _ListEnvVarsInput(BaseModel):
+    environment: str | None = Field(None, description="Filter by environment name")
+    vault_id: str | None = Field(None, description="Vault UUID (uses default if omitted)")
+
+
+class OneclawListEnvVarsTool(BaseTool):
+    """List environment variables defined on a vault."""
+
+    name: str = "oneclaw_list_env_vars"
+    description: str = (
+        "List environment variables defined on the vault. Returns keys, environments, "
+        "and metadata (sensitive vars have values omitted). Optionally filter by "
+        "environment name."
+    )
+    args_schema: type[BaseModel] = _ListEnvVarsInput
+    client: OneclawClient
+
+    model_config = ConfigDict(arbitrary_types_allowed=True)
+
+    def _run(self, environment: str | None = None, vault_id: str | None = None) -> str:
+        try:
+            result = self.client.list_env_vars(vault_id=vault_id, environment=environment)
+            return json.dumps(result)
+        except OneclawError as e:
+            return f"[1claw error] {e}"
+
+
+# ---------------------------------------------------------------------------
 # Automations
 # ---------------------------------------------------------------------------
 
@@ -417,6 +489,8 @@ def get_all_tools(client: OneclawClient) -> list[BaseTool]:
         OneclawPutSecretTool(client=client),
         OneclawListSecretsTool(client=client),
         OneclawRotateSecretTool(client=client),
+        OneclawResolveEnvTool(client=client),
+        OneclawListEnvVarsTool(client=client),
         OneclawMemoryPutTool(client=client),
         OneclawMemoryGetTool(client=client),
         OneclawMemorySearchTool(client=client),
