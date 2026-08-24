@@ -369,9 +369,7 @@ class _ResolveEnvInput(BaseModel):
     environment: str | None = Field(
         None, description="Environment name (production, preview, development)"
     )
-    git_branch: str | None = Field(
-        None, description="Git branch for branch-specific overrides"
-    )
+    git_branch: str | None = Field(None, description="Git branch for branch-specific overrides")
     vault_id: str | None = Field(None, description="Vault UUID (uses default if omitted)")
 
 
