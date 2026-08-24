@@ -200,6 +200,17 @@ JWTs are cached and automatically refreshed 60 seconds before expiry.
 
 All tools accept a shared `OneclawClient` via the `client` parameter. Use `get_all_tools(client)` to get all 11 tools at once.
 
+## Platform v0.56+ (HITL, HFA, Safe, guardrail governance)
+
+LangChain tools target 1Claw API **v0.56+**:
+
+| Capability | Tool impact |
+|------------|-------------|
+| **Graduated HITL** | `OneclawSubmitTransactionTool` may return `awaiting_approval` — handle 202 in agent loops or use dashboard/mobile approvals. |
+| **Guardrail governance** | Execution intents and guardrail widening use server-side approval queues. |
+| **Safe foundation** | Agent Safe accounts via Vault API (CLI: `1claw agent accounts`). |
+| **Multichain** | BTC/SOL/XRP/ADA/TRX signing unchanged; Vault/Shroud deps: `rust-bitcoin`, `solana-sdk` v4, `xrpl-rust` 1.1.0. |
+
 ## Development
 
 ```bash
