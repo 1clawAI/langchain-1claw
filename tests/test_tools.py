@@ -150,7 +150,7 @@ class TestAutomationTool:
 class TestGetAllTools:
     def test_returns_all_tools(self, client):
         tools = get_all_tools(client)
-        assert len(tools) == 11
+        assert len(tools) == 13
         names = {t.name for t in tools}
         assert "oneclaw_get_secret" in names
         assert "oneclaw_submit_transaction" in names
