@@ -6,7 +6,7 @@
 
 You're building a LangChain agent that needs API keys, wallet signing, or memory that survives across sessions. Pasting credentials into `.env` files works until you deploy, share the repo, or the model accidentally echoes a secret in chat.
 
-This package gives your agent 11 LangChain tools backed by [1Claw](https://1claw.xyz). Secrets live in an HSM-encrypted vault. A human grants access through policies, so the agent only reads paths you allow. Signing keys never leave the server. Memory is encrypted and searchable.
+This package gives your agent 13 LangChain tools backed by [1Claw](https://1claw.xyz). Secrets live in an HSM-encrypted vault. A human grants access through policies, so the agent only reads paths you allow. Signing keys never leave the server. Memory is encrypted and searchable.
 
 Install one package, pass an `ocv_` agent API key, and call `get_all_tools()`. You get vault CRUD, encrypted memory, EIP-191 signing, multi-chain transactions, and automation triggers without writing HTTP clients yourself.
 
@@ -15,6 +15,7 @@ Install one package, pass an `ocv_` agent API key, and call `get_all_tools()`. Y
 | Category | Components | What it does |
 |----------|-----------|--------------|
 | **Secrets** | `OneclawGetSecretTool`, `OneclawPutSecretTool`, `OneclawListSecretsTool`, `OneclawRotateSecretTool` | CRUD and rotation for HSM-encrypted vault secrets |
+| **Env vars** | `OneclawResolveEnvTool`, `OneclawListEnvVarsTool` | Resolve vault env vars with precedence; list scoped keys |
 | **Memory** | `OneclawMemoryPutTool`, `OneclawMemoryGetTool`, `OneclawMemorySearchTool` | Encrypted persistent memory with semantic search |
 | **Signing** | `OneclawSignMessageTool`, `OneclawSubmitTransactionTool`, `OneclawGetBalanceTool` | EIP-191 signing and multi-chain transaction submission (ETH, BTC, SOL, XRP, ADA, TRX) |
 | **Automations** | `OneclawTriggerAutomationTool` | Trigger pre-configured workflow automations |
@@ -41,7 +42,7 @@ from langchain_1claw import OneclawClient, get_all_tools
 # Authenticate with your agent's API key
 client = OneclawClient(api_key="ocv_your_agent_key")
 
-# Get all 11 tools
+# Get all 13 tools
 tools = get_all_tools(client)
 
 # Build an agent
@@ -198,11 +199,11 @@ JWTs are cached and automatically refreshed 60 seconds before expiry.
 
 ### Tools
 
-All tools accept a shared `OneclawClient` via the `client` parameter. Use `get_all_tools(client)` to get all 11 tools at once.
+All tools accept a shared `OneclawClient` via the `client` parameter. Use `get_all_tools(client)` to get all 13 tools at once.
 
 ## Platform v0.56+ (HITL, HFA, Safe, guardrail governance)
 
-LangChain tools target 1Claw API **v0.56+**:
+LangChain tools target 1Claw API **v0.58+**:
 
 | Capability | Tool impact |
 |------------|-------------|
