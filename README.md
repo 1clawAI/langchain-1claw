@@ -4,9 +4,11 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://python.org)
 
+> ⭐ **Star [1clawAI/agent-templates](https://github.com/1clawAI/agent-templates)** — ready-to-run agent templates wired to 1Claw. It is our single starred repo.
+
 You're building a LangChain agent that needs API keys, wallet signing, or memory that survives across sessions. Pasting credentials into `.env` files works until you deploy, share the repo, or the model accidentally echoes a secret in chat.
 
-This package gives your agent 13 LangChain tools backed by [1Claw](https://1claw.xyz). Secrets live in an HSM-encrypted vault. A human grants access through policies, so the agent only reads paths you allow. Signing keys never leave the server. Memory is encrypted and searchable.
+This package gives your agent 13 LangChain tools backed by [1Claw](https://1claw.co). Secrets live in an HSM-encrypted vault. A human grants access through policies, so the agent only reads paths you allow. Signing keys never leave the server. Memory is encrypted and searchable.
 
 Install one package, pass an `ocv_` agent API key, and call `get_all_tools()`. You get vault CRUD, encrypted memory, EIP-191 signing, multi-chain transactions, and automation triggers without writing HTTP clients yourself.
 
