@@ -56,7 +56,7 @@ Per LangChain guidance, avoid submitting as:
 - [ ] README install snippet matches PyPI (`pip install langchain-1claw`).
 - [ ] Example in `examples/` runs against production or documented mock mode.
 - [ ] Version badge in README tracks PyPI.
-- [ ] Contact email `ops@1claw.xyz` in `pyproject.toml` authors.
+- [ ] Contact email `ops@1claw.co` in `pyproject.toml` authors.
 - [ ] Confirm `langchain-core` version bounds match current LangChain releases.
 
 ## Co-marketing (optional)

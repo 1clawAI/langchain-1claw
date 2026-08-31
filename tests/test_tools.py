@@ -23,7 +23,7 @@ from langchain_1claw.tools import (
     get_all_tools,
 )
 
-BASE = "https://api.1claw.xyz"
+BASE = "https://api.1claw.co"
 TOKEN_RESP = {
     "access_token": "jwt_test",
     "expires_in": 3600,

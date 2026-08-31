@@ -12,7 +12,7 @@ from langchain_1claw._client import (
     OneclawValidationError,
 )
 
-BASE = "https://api.1claw.xyz"
+BASE = "https://api.1claw.co"
 TOKEN_RESP = {
     "access_token": "jwt_test_token",
     "expires_in": 3600,

@@ -8,7 +8,7 @@ import respx
 from langchain_1claw._client import OneclawClient
 from langchain_1claw.retrievers import OneclawMemoryRetriever
 
-BASE = "https://api.1claw.xyz"
+BASE = "https://api.1claw.co"
 TOKEN_RESP = {
     "access_token": "jwt_test",
     "expires_in": 3600,

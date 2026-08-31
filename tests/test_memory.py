@@ -11,7 +11,7 @@ from langchain_core.messages import AIMessage, HumanMessage, messages_to_dict
 from langchain_1claw._client import OneclawClient
 from langchain_1claw.memory import OneclawChatMessageHistory, OneclawScratchChatMessageHistory
 
-BASE = "https://api.1claw.xyz"
+BASE = "https://api.1claw.co"
 TOKEN_RESP = {
     "access_token": "jwt_test",
     "expires_in": 3600,
