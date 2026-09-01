@@ -37,5 +37,21 @@ jobs:
           python-version: "3.12"
       - run: pip install build
       - run: python -m build
+      # PyPI will not let a version be replaced, so a bad or duplicate upload
+      # burns that version number permanently. Both checks run before the push.
+      - name: Check the artifacts
+        run: |
+          pip install twine
+          twine check dist/*
+
+      - name: Refuse a version that is already on PyPI
+        run: |
+          VERSION=$(python -c "import tomllib;print(tomllib.load(open('pyproject.toml','rb'))['project']['version'])")
+          if curl -sf "https://pypi.org/pypi/langchain-1claw/$VERSION/json" >/dev/null 2>&1; then
+            echo "langchain-1claw $VERSION is already published. Bump the version in pyproject.toml."
+            exit 1
+          fi
+          echo "langchain-1claw $VERSION is not on PyPI yet."
+
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
