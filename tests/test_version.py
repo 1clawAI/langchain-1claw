@@ -17,9 +17,7 @@ def test_dunder_version_matches_pyproject() -> None:
     so there is one source of truth; this asserts it stayed that way.
     """
     root = pathlib.Path(__file__).resolve().parents[1]
-    declared = re.search(
-        r'^version\s*=\s*"([^"]+)"', (root / "pyproject.toml").read_text(), re.M
-    )
+    declared = re.search(r'^version\s*=\s*"([^"]+)"', (root / "pyproject.toml").read_text(), re.M)
     assert declared, "pyproject.toml has no version"
 
     mod = importlib.import_module("langchain_1claw")
