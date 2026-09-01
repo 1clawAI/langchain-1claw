@@ -31,7 +31,8 @@ from .tools import (
 # drifts the moment a release bumps one and not the other — 0.59.8 shipped
 # reporting 0.59.6, so anyone checking __version__ got the wrong answer.
 try:  # pragma: no cover - trivial
-    from importlib.metadata import PackageNotFoundError, version as _dist_version
+    from importlib.metadata import PackageNotFoundError
+    from importlib.metadata import version as _dist_version
 
     __version__ = _dist_version("langchain-1claw")
 except PackageNotFoundError:  # running from a source tree, not installed
