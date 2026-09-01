@@ -26,8 +26,16 @@ from .tools import (
     get_all_tools,
 )
 
-__version__ = "0.2.2"
+# Single source of truth: the version lives in pyproject.toml and is read
+# from the installed distribution metadata. A hand-maintained literal here
+# drifts the moment a release bumps one and not the other — 0.59.8 shipped
+# reporting 0.59.6, so anyone checking __version__ got the wrong answer.
+try:  # pragma: no cover - trivial
+    from importlib.metadata import PackageNotFoundError, version as _dist_version
 
+    __version__ = _dist_version("langchain-1claw")
+except PackageNotFoundError:  # running from a source tree, not installed
+    __version__ = "0+unknown"
 __all__ = [
     # Client
     "OneclawClient",
